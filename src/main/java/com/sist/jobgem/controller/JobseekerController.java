@@ -167,6 +167,11 @@ public class JobseekerController {
     @GetMapping("/blocklist")
     public Page<BlockDto> getBlockList(@RequestBody Pageable pageable, @RequestParam(required = false) String value,
             @RequestParam(required = false) String type) {
-        return blockService.getblackList(pageable, value, type);
+        return blockService.getblackjobseekerList(pageable, value, type);
     }
+    @GetMapping("/notBlock")
+    public List<JobseekerDto> notBlock() {
+        return jobseekerService.notBlock();
+    }
+
 }

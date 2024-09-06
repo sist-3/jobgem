@@ -33,6 +33,11 @@ public class Block {
     private String blContent;
 
     @OneToOne
-    @JoinColumn(name = "jo_idx")
+    @JoinColumn(name = "jo_idx", nullable = false)
     private Jobseeker jobseeker;
+
+    @OneToOne
+    @JoinColumn(name = "co_idx", nullable = false)
+
+    private Company company;
 }

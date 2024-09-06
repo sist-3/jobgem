@@ -1,6 +1,7 @@
 package com.sist.jobgem.controller;
 
 import com.sist.jobgem.dto.*;
+import com.sist.jobgem.service.BlockService;
 import com.sist.jobgem.service.CompanyService;
 
 import com.sist.jobgem.service.TalentService;
@@ -21,6 +22,8 @@ public class CompanyController {
     private CompanyService companyService;
     @Autowired
     private TalentService talentService;
+    @Autowired
+    private BlockService blockService;
 
     @GetMapping("")
     public ResponseEntity<CompanyIndexDto> Index(@RequestParam int id,@RequestParam int blockPage) {
@@ -53,5 +56,9 @@ public class CompanyController {
     @GetMapping("/list")
     public Page<CompanyDto> getCompanyList(@RequestBody Pageable pageable, @RequestParam(required = false) String value, @RequestParam(required = false) String type) {
         return companyService.getCompanyList(pageable, value, type);
+    }
+    @GetMapping("/blocklist")
+    public Page<BlockDto> getBlockList(Pageable pageable, String value, String type) {
+        return blockService.getblackcompanyList(pageable, value, type);
     }
 }
