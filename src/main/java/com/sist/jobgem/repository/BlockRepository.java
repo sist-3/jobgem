@@ -3,6 +3,8 @@ package com.sist.jobgem.repository;
 import com.sist.jobgem.dto.BlockDto;
 import com.sist.jobgem.entity.Block;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,7 +27,7 @@ public interface BlockRepository extends JpaRepository<Block, Integer> {
            "OR (:type = 'address' AND b.jobseeker.joAddress LIKE %:value%) " +
            "OR (:type = 'edu' AND b.jobseeker.joEdu LIKE %:value%) " +
            "OR (:type = 'sal' AND b.jobseeker.joSal LIKE %:value%)")
-    Page<Block> findByTypeAndValuejobseekerContaining(@Param("type") String type, @Param("value") String value, Pageable pageable);
+    Page<BlockDto> findByTypeAndValuejobseekerContaining(@Param("type") String type, @Param("value") String value, Pageable pageable);
 
     @Query("SELECT b FROM Block b " +
             "WHERE (:type = 'bldate' AND cast(b.blDate as string) LIKE %:value%) OR " +
@@ -41,6 +43,10 @@ public interface BlockRepository extends JpaRepository<Block, Integer> {
             "(:type = 'score' AND cast(b.company.coScore as string) LIKE %:value%) OR " +
             "(:type = 'managerName' AND b.company.coManagerName LIKE %:value%) OR " +
             "(:type = 'managerTel' AND b.company.coManagerTel LIKE %:value%)")
-    Page<Block> findByTypeAndValuecompanyContaining(@Param("type") String type, @Param("value") String value, Pageable pageable);
-
+    Page<BlockDto> findByTypeAndValuecompanyContaining(@Param("type") String type, @Param("value") String value, Pageable pageable);
+    
+    @Query("SELECT new com.sist.jobgem.dto.BlockDto(b) FROM Block b " +
+           "join b.jobseeker j join b.company c " +
+           "on b.joIdx = j.id and b.coIdx = c.id")
+    Page<BlockDto> blackjobcompany(Pageable pageable);
 }

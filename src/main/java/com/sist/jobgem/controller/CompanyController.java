@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 @RestController
 @RequestMapping("/api/company")
 public class CompanyController {
@@ -57,8 +57,8 @@ public class CompanyController {
     public Page<CompanyDto> getCompanyList(@RequestBody Pageable pageable, @RequestParam(required = false) String value, @RequestParam(required = false) String type) {
         return companyService.getCompanyList(pageable, value, type);
     }
-    @GetMapping("/blocklist")
-    public Page<BlockDto> getBlockList(Pageable pageable, String value, String type) {
-        return blockService.getblackcompanyList(pageable, value, type);
+    @GetMapping("/blackList")
+    public Page<BlockDto> getBlackList(@RequestBody Pageable pageable, @RequestParam(required = false) String value, @RequestParam(required = false) String type) {
+        return blockService.blackcompanyList(pageable, value, type);
     }
 }

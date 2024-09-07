@@ -164,14 +164,14 @@ public class JobseekerController {
         return jobseekerService.getJobseekerList(pageable, value, type);
     }
 
-    @GetMapping("/blocklist")
-    public Page<BlockDto> getBlockList(@RequestBody Pageable pageable, @RequestParam(required = false) String value,
-            @RequestParam(required = false) String type) {
-        return blockService.getblackjobseekerList(pageable, value, type);
+    @GetMapping("/blackList")
+    public Page<BlockDto> getBlackList(@RequestBody Pageable pageable,  @RequestParam(required = false) String value, @RequestParam(required = false) String type) {
+        return blockService.blackjobseekerList(pageable, value, type);
     }
+
     @GetMapping("/notBlock")
     public List<JobseekerDto> notBlock() {
         return jobseekerService.notBlock();
     }
-
+    
 }

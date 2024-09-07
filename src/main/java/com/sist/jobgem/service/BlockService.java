@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sist.jobgem.dto.BlockDto;
-import com.sist.jobgem.mapper.BlockMapper;
 import com.sist.jobgem.repository.BlockRepository;
 
 @Service
@@ -14,11 +13,17 @@ public class BlockService {
     @Autowired
     private BlockRepository blockRepository;
 
-    public Page<BlockDto> getblackList(Pageable pageable, String value, String type) {
+    public Page<BlockDto> blackjobseekerList(Pageable pageable, String value, String type) {
         if (value == null && type == null) {
-            return blockRepository.findAll(pageable).map(BlockMapper.INSTANCE::toDto);
+            return blockRepository.blackjobcompany(pageable);
         }
-        return blockRepository.findByTypeAndValueContaining(type, value, pageable)
-                .map(BlockMapper.INSTANCE::toDto);
+        return blockRepository.findByTypeAndValuejobseekerContaining(type, value, pageable);
+    }
+
+    public Page<BlockDto> blackcompanyList(Pageable pageable, String value, String type) {
+        if (value == null && type == null) {
+            return blockRepository.blackjobcompany(pageable);
+        }
+        return blockRepository.findByTypeAndValuecompanyContaining(type, value, pageable);
     }
 }
