@@ -18,9 +18,7 @@ import com.sist.jobgem.dto.ReviewDto;
 import com.sist.jobgem.dto.SkillDto;
 import com.sist.jobgem.entity.Interview;
 
-
 import com.sist.jobgem.entity.Jobseeker;
-
 
 import com.sist.jobgem.entity.Resume;
 import com.sist.jobgem.entity.Review;
@@ -137,7 +135,6 @@ public class JobseekerController {
         return resumeService.updateResume(dto);
     }
 
-
     @GetMapping("/updateMypage")
     public Jobseeker updateJobseekerDetails(@RequestParam int id, @RequestBody JobseekerDto jobseekerDto) {
         return jobseekerService.updateJobseekerDetails(id, jobseekerDto);
@@ -165,13 +162,14 @@ public class JobseekerController {
     }
 
     @GetMapping("/blackList")
-    public Page<BlockDto> getBlackList(@RequestBody Pageable pageable,  @RequestParam(required = false) String value, @RequestParam(required = false) String type) {
+    public Page<BlockDto> getBlackList(@RequestBody Pageable pageable, @RequestParam(required = false) String value,
+            @RequestParam(required = false) String type) {
         return blockService.blackjobseekerList(pageable, value, type);
     }
 
-    @GetMapping("/notBlock")
-    public List<JobseekerDto> notBlock() {
-        return jobseekerService.notBlock();
+    @GetMapping("/notBlack")
+    public List<JobseekerDto> notBlack() {
+        return jobseekerService.notBlack();
     }
-    
+
 }

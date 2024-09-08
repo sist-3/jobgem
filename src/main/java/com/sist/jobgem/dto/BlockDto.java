@@ -17,10 +17,13 @@ public class BlockDto {
     private String blContent;
     private Jobseeker jobseeker;
     private Company company;
+
     public BlockDto(Block entity) {
         this.id = entity.getId();
         this.name = entity.getJobseeker().getJoName();
         this.blDate = entity.getBlDate();
         this.blContent = entity.getBlContent();
+        this.jobseeker = entity.getJobseeker();
+        this.company = entity.getCompany();
     }
 }

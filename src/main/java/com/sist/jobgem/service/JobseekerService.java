@@ -87,11 +87,8 @@ public class JobseekerService {
         // 변경된 엔티티 저장
         return jobseekerRepository.save(existingJobseeker);
     }
-    public List<JobseekerDto> joinBlock() {
-        return JobseekerMapper.INSTANCE.toDtoList(jobseekerRepository.findAll());
-    }
 
-    public List<JobseekerDto> notBlock() {
+    public List<JobseekerDto> notBlack() {
         return jobseekerRepository.findJobseekersNotInBlock();
     }
 
