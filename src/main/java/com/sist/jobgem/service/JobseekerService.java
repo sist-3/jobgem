@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 import com.sist.jobgem.dto.JobseekerDto;
+import com.sist.jobgem.dto.UserDto;
 import com.sist.jobgem.entity.Jobseeker;
 import com.sist.jobgem.entity.Skill;
 import com.sist.jobgem.entity.User;
 import com.sist.jobgem.mapper.JobseekerMapper;
+import com.sist.jobgem.mapper.UserMapper;
 import com.sist.jobgem.repository.JobseekerRepository;
 import com.sist.jobgem.repository.SkillRepository;
 import com.sist.jobgem.repository.UserRepository;
