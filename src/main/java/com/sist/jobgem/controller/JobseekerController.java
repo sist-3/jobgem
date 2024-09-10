@@ -227,4 +227,23 @@ public class JobseekerController {
             @RequestParam(required = false) String type) {
         return blockService.blackjobseekerList(pageable, value, type);
     }
+    @GetMapping("/notBlack")
+    public List<JobseekerDto> notBlack(@RequestBody @RequestParam(required = false) String type,
+            @RequestParam(required = false) String value) {
+        return jobseekerService.notBlack(type, value);
+    }
+    
+    @GetMapping("/addjobseekerBlock")
+    public BlockDto addjobseekerBlock(@RequestBody BlockDto dto) {
+        return blockService.addjobseekerBlock(dto);
+    }
+   
+    @RequestMapping("deletejobseekerBlock")
+    public int deletejobseekerBlock(@RequestParam List<String> chkList) {
+        for (int i = 0; i < chkList.size(); i++) {
+            blockService.deletecomjobBlock(Integer.parseInt(chkList.get(i)));
+        }
+        return chkList.size();
+  }
+
 }

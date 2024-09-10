@@ -65,8 +65,25 @@ public class CompanyController {
     public Page<CompanyDto> getCompanyList(@RequestBody Pageable pageable, @RequestParam(required = false) String value, @RequestParam(required = false) String type) {
         return companyService.getCompanyList(pageable, value, type);
     }
+
     @GetMapping("/blackList")
     public Page<BlockDto> getBlackList(@RequestBody Pageable pageable, @RequestParam(required = false) String value, @RequestParam(required = false) String type) {
         return blockService.blackcompanyList(pageable, value, type);
     }
+    @GetMapping("/notBlack")
+    public List<CompanyDto> notBlack(@RequestBody @RequestParam(required = false) String type, @RequestParam(required = false) String value) {
+        return companyService.notBlack(type, value);
+    }
+    @GetMapping("/addcompanyBlock")
+    public BlockDto addcompanyBlock(@RequestBody BlockDto dto) {
+        return blockService.addcompanyBlock(dto);
+    }
+    @GetMapping("deletecompanyBlock")
+    public int deletecompanyBlock(@RequestParam List<String> chkList) {
+        for (int i = 0; i < chkList.size(); i++) {
+            blockService.deletecomjobBlock(Integer.parseInt(chkList.get(i)));
+        }
+        return chkList.size();
+    }
+
 }

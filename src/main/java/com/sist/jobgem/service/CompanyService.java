@@ -3,6 +3,9 @@ package com.sist.jobgem.service;
 import com.sist.jobgem.dto.*;
 import com.sist.jobgem.mapper.CompanyMapper;
 import com.sist.jobgem.repository.*;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -59,6 +62,12 @@ public class CompanyService {
         return talentList;
     }
 
-
+    public List<CompanyDto> notBlack(String type, String value) {
+        if (value == null && type == null) {
+            return CompanyMapper.INSTANCE.toDtoList(companyRepository.findAllcompanysNotInBlock());
+        }else{
+        return CompanyMapper.INSTANCE.toDtoList(companyRepository.findCompanysNotInBlock(type, value));
+        }
+    }
 
 }

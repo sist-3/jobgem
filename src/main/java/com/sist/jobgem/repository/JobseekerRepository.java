@@ -70,7 +70,21 @@ public interface JobseekerRepository extends JpaRepository<Jobseeker, Integer> {
                         "(:type = 'birth' AND CAST(j.joBirth AS string) LIKE %:value%)")
         Page<Jobseeker> findByTypeAndValueContaining(@Param("type") String type, @Param("value") String value,
                         Pageable pageable);
+        
+        @Query("SELECT j FROM Jobseeker j LEFT JOIN Block b ON j.id = b.joIdx WHERE b.joIdx IS NULL " +
+               "AND ((:type IS NULL AND :value IS NULL) OR " +
+               "(:type = 'name' AND j.joName LIKE %:value%) OR " +
+               "(:type = 'birth' AND CAST(j.joBirth AS string) LIKE %:value%) OR " +
+               "(:type = 'tel' AND j.joTel LIKE %:value%) OR " +
+               "(:type = 'address' AND j.joAddress LIKE %:value%) OR " +
+               "(:type = 'edu' AND j.joEdu LIKE %:value%) OR " +
+               "(:type = 'sal' AND j.joSal LIKE %:value%) OR " +
+               "(:type = 'gender' AND j.joGender LIKE %:value%) OR " +
+               "(:type = 'joinDate' AND CAST(j.user.usJoinDate AS string) LIKE %:value%) OR " +
+               "(:type = 'leaveDate' AND CAST(j.user.usLeaveDate AS string) LIKE %:value%))")
+        List<Jobseeker> findJobseekersNotInBlock(@Param("type") String type, @Param("value") String value);
 
-        @Query("select new com.sist.jobgem.dto.JobseekerDto(j) from Jobseeker j where j.id not in (select b.joIdx from Block b)")
-        List<JobseekerDto> findJobseekersNotInBlock();
+        @Query("SELECT j FROM Jobseeker j LEFT JOIN Block b ON j.id = b.joIdx WHERE b.joIdx IS NULL")
+        List<Jobseeker> findAllJobseekersNotInBlock();
+
 }

@@ -90,8 +90,12 @@ public class JobseekerService {
         return jobseekerRepository.save(existingJobseeker);
     }
 
-    public List<JobseekerDto> notBlack() {
-        return jobseekerRepository.findJobseekersNotInBlock();
+    public List<JobseekerDto> notBlack(String value, String type) {
+        if (value == null && type == null) {
+            return JobseekerMapper.INSTANCE.toDtoList(jobseekerRepository.findAllJobseekersNotInBlock());
+        }else{
+        return JobseekerMapper.INSTANCE.toDtoList(jobseekerRepository.findJobseekersNotInBlock(value, type));
+        }
     }
 
 }
