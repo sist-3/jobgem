@@ -90,7 +90,7 @@ public class JobseekerController {
     ApplymentService applymentService;
 
     @GetMapping("/jobseeker")
-    public ResponseEntity<JobseekerDto> getJobseeker(int id) {
+    public ResponseEntity<JobseekerDto> getJobseeker(@RequestParam(value = "id", required = true) int id) {
         return ResponseEntity.ok(jobseekerService.getJobseeker(id));
     }
 
@@ -120,7 +120,7 @@ public class JobseekerController {
     }
 
     @GetMapping("/applymentSearch")
-    public Page<ApplymentDto> getApplymentListByFilters(@ModelAttribute ApplymentSearchDto dto, int curPage) {
+    public Page<ApplymentDto> getApplymentListByFilters(@ModelAttribute ApplymentSearchDto dto, @RequestParam(value="curPage", required = false)int curPage) {
         PageRequest pageable = PageRequest.of(curPage, 5, Sort.by(Sort.Direction.DESC, "id"));
         return applymentService.searchApplyment(dto, pageable);
     }

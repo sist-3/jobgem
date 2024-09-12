@@ -63,6 +63,7 @@ public class ApplymentService {
                 dto.getApRead(),
                 dto.getStartDate(),
                 dto.getEndDate(),
+                dto.getPoIdx(),
                 pageable);
     }
 
@@ -72,5 +73,9 @@ public class ApplymentService {
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
         return new PageImpl<>(applymentDtoList, pageable, applymentList.getTotalElements());
+    }
+
+    public void view(int id) {
+        applymentRepository.view(id);
     }
 }
